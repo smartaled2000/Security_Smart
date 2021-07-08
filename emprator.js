@@ -100,7 +100,7 @@ client.on("message", message => {
 client.on('message', message => {
 if (message.guild) return;
 if (message.author.bot) return;
-var channel = client.channels.cache.get("862700683022172210");
+var channel = client.channels.cache.get("861980666068598814");
 if (!channel) return;
 var embed = new Discord.MessageEmbed()
 .setColor("#0000ff")
@@ -1440,10 +1440,10 @@ client.on("message", message => {
   }
 });
 //===================token===========//
-client.login("");
+client.login("ODU5ODU0ODUyNjUzNTgwMjg5.YNywPA.cgwr4Q5aJQ8hCyHjMcRVBnUVBAY");
 //===================spawn===========//
 const { ShardingManager } = require('discord.js');
-const manager = new ShardingManager('emprator.js', { token: 'lera token dane' });
+const manager = new ShardingManager('emprator.js', { token: 'ODU5ODU0ODUyNjUzNTgwMjg5.YNywPA.cgwr4Q5aJQ8hCyHjMcRVBnUVBAY' });
 
 manager.on('shardCreate', shard => console.log(`Launched shard ${shard.id}`));
 manager.spawn();
