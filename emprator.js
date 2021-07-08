@@ -38,46 +38,6 @@ client.on("error", console.error);
 
 //===============help===========//
 client.on("message", async message => {
-  if (message.content.startsWith(prefix + "help")) {
-    if (cooldown.has(message.author.id)) {
-      return message.channel
-        .send(` Please wait for 10 second `)
-        .then(m => {
-          m.delete({ timeout: cdtime * 600 });
-        });
-    }
-    cooldown.add(message.author.id);
-    setTimeout(() => {
-      cooldown.delete(message.author.id);
-    }, cdtime * 1000);
-    let help = new Discord.MessageEmbed()
-      .setColor("#ffff00")
-      .setAuthor(message.author.username, message.author.AvatarURL)
-      .setThumbnail(message.author.avatarURL())
-      .setTitle(`Click Here To Add : Security`)
-      .setURL(
-        `https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot`
-      ).setDescription(`
- __**ℹ | Info \ 📚 | Moderation Commands**__ 
------------------------------
-> n!userinfo -- n!ping -- n!serverinfo
-> n!bot -- n!lock -- n!unlock -- n!clear
-> n!ban -- n!mute -- n!unmute -- n!unban
------------------------------
- __**🛡 | Security Commands**__ 
------------------------------
-> anti kick -- anti ban 
-> anti roleC -- anti roleD 
-> anti channelD -- anti channelC
-> n!anti bot [on/off]
-> n!problem [on/off]
-> n!setting  
------------------------------
-`);
-
-    message.channel.send(help);
-  }
-});
 
 //===================token===========//
 client.login("ODU0NDI0NzYyOTY5NDg5NDA4.YMjvEQ.MOHVz1NRqcv7sPxp8VVTZzpjapU");
