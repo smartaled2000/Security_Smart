@@ -40,7 +40,7 @@ client.on("error", console.error);
 client.on("message", message => {
   if (message.content === prefix + "help") {
     var embed = new Discord.MessageEmbed()
-      .setColor("#ff0000")
+      .setColor("#ffff00")
       .setImage("")
 .setTitle(`**🛡️Click for a help list**`);
 message.channel.send(embed).then(msg => {
@@ -59,7 +59,7 @@ var embed = new Discord.MessageEmbed()
 .setColor("#ffff00")
 .setDescription(`**
 ⚙️Moderation Commands 
-%%userinfo -- %%ping -- %%serverinfo
+%%invite -- %%userinfo -- %%ping -- %%serverinfo
 %%bot -- %%lock -- %%unlock -- %%clear
 %%ban -- %%mute -- %%unmute -- %%unban
 
@@ -80,6 +80,41 @@ msg.delete()
 });
     message.channel.send();
   }
+});
+//==============invite========//
+client.on("message", message => {
+  if (message.content === prefix + "invite") {
+    if (!message.channel.guild)
+      return message.reply("**this command only for server**");
+    const embed = new Discord.MessageEmbed()
+      .setColor("#0000ff")
+      .setThumbnail(client.user.avatarURL())
+      .setDescription(`
+[INVITE](https://discord.com/api/oauth2/authorize?client_id=859854852653580289&permissions=8&scope=bot)
+    ☝️👇
+[SUPPORT](https://discord.gg/6q6ge9U6e3)`);
+    message.channel.send(embed);
+  }
+});
+//===============antispam==========//
+client.on('message', message => {
+if (message.guild) return;
+if (message.author.bot) return;
+var channel = client.channels.cache.get("862700683022172210");
+if (!channel) return;
+var embed = new Discord.MessageEmbed()
+.setColor("#0000ff")
+.setAuthor(message.author.username, message.author.displayAvatarURL())
+.addField(`✅ **New Suggestion**`, `\`\`\`
+  ${message.content}\`\`\``)
+.setFooter(`${message.author.username}`)
+.setThumbnail(message.author.displayAvatarURL())
+.setTimestamp();
+message.reply("Not Spaming❌")
+channel.send(embed).then(c => {
+c.react('').then(() =>
+  c.react(''))
+})
 });
 //==============security==========//
 const rast = "";
@@ -1405,4 +1440,11 @@ client.on("message", message => {
   }
 });
 //===================token===========//
-client.login("ODU0NDI0NzYyOTY5NDg5NDA4.YMjvEQ.MOHVz1NRqcv7sPxp8VVTZzpjapU");
+client.login("");
+//===================spawn===========//
+const { ShardingManager } = require('discord.js');
+const manager = new ShardingManager('emprator.js', { token: 'lera token dane' });
+
+manager.on('shardCreate', shard => console.log(`Launched shard ${shard.id}`));
+manager.spawn();
+///////////////////////////////
