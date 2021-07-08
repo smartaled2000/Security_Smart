@@ -765,10 +765,8 @@ client.on("guildMemberRemove", async member => {
     });
   }
 });
-
-//////
-
-let antibots = JSON.parse(fs.readFileSync("./antibots.json", "utf8")); //require antihack.json file
+//================antibot============//
+let antibots = JSON.parse(fs.readFileSync("./antibot.json", "utf8")); //require antihack.json file
 client.on("message", message => {
   if (message.content.startsWith(prefix + "anti bot on")) {
     if (cooldown.has(message.author.id)) {
@@ -793,7 +791,7 @@ client.on("message", message => {
     message.channel.send(
       `**${rast}  AntiBot Is \`Enable\` **`
     );
-    fs.writeFile("./antibots.json", JSON.stringify(antibots), err => {
+    fs.writeFile("./antibot.json", JSON.stringify(antibots), err => {
       if (err)
         console.error(err).catch(err => {
           console.error(err);
@@ -825,7 +823,7 @@ client.on("message", message => {
     message.channel.send(
       `**${rast}  AntiBot Is \`Disable\` **`
     );
-    fs.writeFile("./antibots.json", JSON.stringify(antibots), err => {
+    fs.writeFile("./antibot.json", JSON.stringify(antibots), err => {
       if (err)
         console.error(err).catch(err => {
           console.error(err);
@@ -843,7 +841,7 @@ client.on("guildMemberAdd", member => {
   if (member.user.bot) return member.kick();
 });
 
-fs.writeFile("./antibots.json", JSON.stringify(antibots), err => {
+fs.writeFile("./antibot.json", JSON.stringify(antibots), err => {
   if (err)
     console.error(err).catch(err => {
       console.error(err);
@@ -1114,7 +1112,6 @@ client.on("message", message => {
       .catch(console.error);
   }
 });
-
 //=================================[ ping ]=================================//
 
 client.on("message", message => {
@@ -1129,5 +1126,283 @@ client.on("message", message => {
 });
 
 //=================================[ botinfo ]==============================//
+
+client.on("message", message => {
+  if (message.content.startsWith(`${prefix}bot`)) {
+    const tnx = new Discord.MessageEmbed()
+      .setAuthor(client.user.username, client.user.avatarURL())
+      .setThumbnail(
+        `https://cdn.discordapp.com/attachments/772758556848029727/802994883378806824/image0.jpg`
+      )
+      .setColor("#808080")
+      .setTitle(`Info about ${client.user.username}.`)
+      .addField(
+        "**My Ping**",
+        `${Date.now() - message.createdTimestamp}` + "MS",
+        true
+      )
+      .addField(
+        "**Ram Usage**",
+        `${(process.memoryUsage().rss / 1048576).toFixed()}MB`,
+        true
+      )
+      .addField("**Servers**", `[ ${client.guilds.cache.size} ]`, true)
+      .addField("**Channels**", `[ ${client.channels.cache.size} ]`, true)
+      .addField("**Users**", `[ ${client.guilds.cache.reduce((a, g) => a + g.memberCount, 0)} ]`, true)
+      .addField("**My Name**", `[ ${client.user.tag} ]`, true)
+      .addField("**My ID**", `[ 785987393349484564 ]`, true)
+      .addField("**DiscordJS**", `[ ${Discord.version} ]`, true)
+      .addField("**NodeJS**", `[ ${process.version} ]`, true)
+      .addField(
+        "**Bot-Owners**",
+        `[<@718920448179699733>]
+[2-]`,
+        true
+      )
+      .addField("**My Prefix**", `[ ${prefix} ]`, true)
+      .addField("**My Language**", `[ Java Script ]`, true)
+      .setFooter("Security");
+
+    message.channel.send(tnx);
+  }
+});
+//=================================[ warn ]=================================//
+
+client.on("message", message => {
+  if (message.content.startsWith(prefix + "warn")) {
+    let args = message.content.split(" ").slice(1);
+    if (!message.member.hasPermission("OWNERSHIP"))
+      return message.reply("you dont have a Permission");
+
+    var user = message.mentions.users.first();
+    var rn = args.slice(1).join(" ");
+    let em = new Discord.MessageEmbed()
+      .setTitle("Error :")
+      .setColor("808080")
+      .setDescription(
+        `
+  **Usage:**
+ ${prefix}warn (user) (reason)
+  Ex :
+  ${prefix}warn ${message.author} 
+  ${prefix}warn ${message.author}  test
+ 
+  `
+      )
+      .setAuthor(message.author.username, message.author.avatarURL());
+    if (!user) return message.channel.send(em);
+
+    let ffg = new Discord.MessageEmbed()
+      .setColor("#080808")
+      .setTimestamp()
+      .setTitle("Warned!")
+      .setDescription(
+        `
+ warned by  : ${message.author.username}
+ reason     : ${rn}
+  `
+      )
+      .setAuthor(message.author.username, message.author.avatarURL())
+      .setFooter(``);
+    message.channel.send(ffg);
+    user.send(ffg);
+    message.delete();
+  }
+});
+
+//=================================[ clear ]================================//
+
+client.on("message", async message => {
+  let command = message.content.toLowerCase().split(" ")[0];
+  command = command.slice(prefix.length);
+  if (command == "clear" || command == "clear") {
+    if (cooldown.has(message.author.id)) {
+      return message.channel
+        .send(` | Please wait for 10 second`)
+        .then(m => {
+          m.delete({ timeout: cdtime * 600 });
+        });
+    }
+
+    cooldown.add(message.author.id);
+
+    setTimeout(() => {
+      cooldown.delete(message.author.id);
+    }, cdtime * 1000);
+    message.delete({ timeout: 0 });
+    if (!message.channel.guild)
+      return message.reply(`This Command For Servers Only`);
+    if (!message.member.hasPermission("MANAGE_GUILD"))
+      return message.channel.send(`You don't have perms`);
+    if (!message.guild.member(client.user).hasPermission("MANAGE_GUILD"))
+      return message.channel.send(`I don't have perms`);
+
+    let args = message.content.split(" ").slice(1);
+    let messagecount = parseInt(args);
+    if (args > 100)
+      return message.channel
+        .send(
+          `
+i cant delete more than 100 messages 
+`
+        )
+        .then(messages => messages.delete(5000));
+    if (!messagecount) messagecount = "100";
+    message.channel.messages
+      .fetch({ limit: 100 })
+      .then(messages => message.channel.bulkDelete(messagecount))
+      .then(msgs => {
+        message.channel
+          .send(
+            `
+${msgs.size} messages cleared
+`
+          )
+          .then(messages => messages.delete({ timeout: 5000 }));
+      });
+  }
+});
+
+//=================================[ kick & ban ]================================//
+
+client.on("message", async message => {
+  if (
+    message.author.bot ||
+    !message.guild ||
+    !message.content.startsWith(prefix)
+  )
+    return;
+  const args = message.content
+      .slice(prefix.length)
+      .trim()
+      .split(/ +/),
+    commandName = args.shift().toLowerCase();
+  if (["ban", "kick"].includes(commandName)) {
+    let mode = commandName;
+    if (
+      !message.member.hasPermission(
+        mode == "kick" ? "KICK_MEMBERS" : "BAN_MEMBERS"
+      )
+    )
+      return message.channel.send(
+        " | You don't have Permissions do to this."
+      );
+    let user = message.guild.member(
+      message.mentions.users.first() ||
+        message.guild.members.cache.find(x => x.id == args[0])
+    );
+    if (!user)
+      return message.channel.send(
+        "| Member not found!"
+      );
+    let bot = message.guild.member(client.user);
+    if (user.user.id == client.user.id) return message.channel.send("lol no");
+    if (user.user.id == message.guild.owner.id)
+      return message.channel.send(
+        ` | You can't ${mode} the owner!`
+      );
+    if (
+      user.roles.highest.position >= message.member.roles.highest.position &&
+      message.author.id !== message.guild.ownerID
+    )
+      return message.channel.send(
+        ` | You can't ${mode} people higher ranked than yourself!`
+      );
+    if (user.roles.highest.position >= bot.roles.highest.position)
+      return message.channel.send(
+        ` | I can't ${mode} people who are higher ranked than me!`
+      );
+    if (!user[`${mode == "ban" ? "bann" : mode}able`])
+      return message.channel.send(
+        ` | Specified user is not ${mode}able.`
+      );
+    user[mode](
+      mode == "ban"
+        ? { days: 7, reason: `Banned by ${message.author.tag}` }
+        : `Kicked by ${message.author.tag}`
+    )
+      .then(() =>
+        message.channel.send(
+          `✅ ${mode == "ban" ? "Bann" : mode}ed __${user.user.tag}__ (ID: \`${
+            user.user.id
+          }\`)`
+        )
+      )
+      .catch(console.error);
+  }
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+let spread = JSON.parse(fs.readFileSync("./spread.json", "utf8"));
+client.on("message", message => {
+  if (message.content.startsWith(prefix + "problem off")) {
+    if (cooldown.has(message.author.id)) {
+      return message.channel
+        .send(`| Please wait for 10 second`)
+        .then(m => {
+          m.delete({ timeout: cdtime * 600 });
+        });
+    }
+
+    cooldown.add(message.author.id);
+
+    setTimeout(() => {
+      cooldown.delete(message.author.id);
+    }, cdtime * 1000);
+    if (!message.channel.guild) return;
+    if (!message.member.hasPermission("MANAGE_GUILD"))
+      return message.channel.send(
+        "**Sorry , But You Dont Have `MANAGE_GUILD` Permission .**"
+      );
+    spread[message.guild.id] = {
+      onoff: "Off"
+    };
+    message.channel.send(
+      `**AntiProblem Is \`Disable\`.**`
+    );
+    fs.writeFile("./spread.json", JSON.stringify(spread), err => {
+      if (err)
+        console.error(err).catch(err => {
+          console.error(err);
+        });
+    });
+  }
+});
+
+client.on("message", message => {
+  if (message.content.startsWith(prefix + "problem on")) {
+    if (cooldown.has(message.author.id)) {
+      return message.channel
+        .send(` | Please wait for 10 second`)
+        .then(m => {
+          m.delete({ timeout: cdtime * 600 });
+        });
+    }
+
+    cooldown.add(message.author.id);
+
+    setTimeout(() => {
+      cooldown.delete(message.author.id);
+    }, cdtime * 1000);
+    if (!message.channel.guild) return;
+    if (!message.member.hasPermission("MANAGE_GUILD"))
+      return message.channel.send(
+        "**Sorry , But You Dont Have `MANAGE_GUILD` Permission .**"
+      );
+    spread[message.guild.id] = {
+      onoff: "On"
+    };
+    message.channel.send(
+      `**AntiProblem Is \`Enable\` **`
+    );
+    fs.writeFile("./spread.json", JSON.stringify(spread), err => {
+      if (err)
+        console.error(err).catch(err => {
+          console.error(err);
+        });
+    });
+  }
+});
 //===================token===========//
 client.login("ODU0NDI0NzYyOTY5NDg5NDA4.YMjvEQ.MOHVz1NRqcv7sPxp8VVTZzpjapU");
