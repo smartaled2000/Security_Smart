@@ -37,7 +37,49 @@ client.on("warn", info => console.log(info));
 client.on("error", console.error);
 
 //===============help===========//
-client.on("message", async message => {
+client.on("message", message => {
+  if (message.content === prefix + "help") {
+    var embed = new Discord.MessageEmbed()
+      .setColor("#ff0000")
+      .setImage("")
+.setTitle(`**🛡️Click for a help list**`);
+message.channel.send(embed).then(msg => {
+msg.react(`🛡️`)
+msg.react(`❌`)
 
+const gFilter = (reaction, user) => reaction.emoji.name === `🛡️` && user.id === message.author.id
+const g = msg.createReactionCollector(gFilter , {time : 200000})
+
+const dFilter = (reaction, user) => reaction.emoji.name === `❌` && user.id === message.author.id
+const d = msg.createReactionCollector(dFilter , {time : 200000})
+
+
+g.on('collect', (reaction , user) => {
+var embed = new Discord.MessageEmbed()
+.setColor("#ffff00")
+.setDescription(`**
+⚙️Moderation Commands 
+%%userinfo -- %%ping -- %%serverinfo
+%%bot -- %%lock -- %%unlock -- %%clear
+%%ban -- %%mute -- %%unmute -- %%unban
+
+🛡️Security Commands
+%%anti kick -- %%anti ban 
+%%anti roleC -- %%anti roleD 
+%%anti channelD -- %%anti channelC
+%%anti bot [on/off]
+%%problem [on/off]
+**`)
+msg.edit(embed)
+reaction.users.remove(user.id)
+})
+
+  d.on('collect', (reaction , user) => {
+msg.delete()
+})
+});
+    message.channel.send();
+  }
+});
 //===================token===========//
 client.login("ODU0NDI0NzYyOTY5NDg5NDA4.YMjvEQ.MOHVz1NRqcv7sPxp8VVTZzpjapU");
