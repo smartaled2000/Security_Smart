@@ -7,7 +7,6 @@ const client = new Client({ disableEveryone: true });
 const canvas = require("canvas");
 const Canvas = require("canvas");
 const convert = require("hh-mm-ss");
-const { TOKEN } = require(`./config.json`);
 const botversion = require("./package.json").version;
 const moment = require("moment");
 const fs = require("fs");
@@ -1440,9 +1439,11 @@ client.on("message", message => {
     });
   }
 });
+//=============token================//
+client.login("");
 //===================spawn===========//
 const { ShardingManager } = require('discord.js');
-const manager = new ShardingManager('emprator.js', { token: './config.json' });
+const manager = new ShardingManager('emprator.js', { token: 'ODU5ODU0ODUyNjUzNTgwMjg5.YNywPA.cgwr4Q5aJQ8hCyHjMcRVBnUVBAY' });
 
 manager.on('shardCreate', shard => console.log(`Launched shard ${shard.id}`));
 manager.spawn();
