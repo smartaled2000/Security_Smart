@@ -1440,8 +1440,6 @@ client.on("message", message => {
     });
   }
 });
-//===================token===========//
-client.login("ODU5ODU0ODUyNjUzNTgwMjg5.YNywPA.cgwr4Q5aJQ8hCyHjMcRVBnUVBAY");
 //===================spawn===========//
 const { ShardingManager } = require('discord.js');
 const manager = new ShardingManager('emprator.js', { token: 'ODU5ODU0ODUyNjUzNTgwMjg5.YNywPA.cgwr4Q5aJQ8hCyHjMcRVBnUVBAY' });
