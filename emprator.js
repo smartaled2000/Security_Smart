@@ -1185,12 +1185,12 @@ client.on("message", message => {
       .addField("**Channels**", `[ ${client.channels.cache.size} ]`, true)
       .addField("**Users**", `[ ${client.guilds.cache.reduce((a, g) => a + g.memberCount, 0)} ]`, true)
       .addField("**My Name**", `[ ${client.user.tag} ]`, true)
-      .addField("**My ID**", `[ 785987393349484564 ]`, true)
+      .addField("**My ID**", `[ 789921556846477364 ]`, true)
       .addField("**DiscordJS**", `[ ${Discord.version} ]`, true)
       .addField("**NodeJS**", `[ ${process.version} ]`, true)
       .addField(
         "**Bot-Owners**",
-        `[<@718920448179699733>]
+        `[<@789921556846477364>]
 [2-]`,
         true
       )
