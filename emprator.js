@@ -7,6 +7,7 @@ const client = new Client({ disableEveryone: true });
 const canvas = require("canvas");
 const Canvas = require("canvas");
 const convert = require("hh-mm-ss");
+const { TOKEN } = require(`./config.json`);
 const botversion = require("./package.json").version;
 const moment = require("moment");
 const fs = require("fs");
