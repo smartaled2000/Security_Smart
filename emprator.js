@@ -58,6 +58,7 @@ g.on('collect', (reaction , user) => {
 var embed = new Discord.MessageEmbed()
 .setColor("#ffff00")
 .setDescription(`**
+[invite Bot Security Smart](https://discord.com/oauth2/authorize?client_id=859854852653580289&permissions=8&scope=bot)
 ⚙️Moderation Commands 
 %%invite -- %%userinfo -- %%ping -- %%serverinfo
 %%bot -- %%lock -- %%unlock -- %%clear
