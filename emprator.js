@@ -97,6 +97,23 @@ client.on("message", message => {
     message.channel.send(embed);
   }
 });
+//===============antieveryone==========//
+client.on("message", message => {
+  var args = message.content.split(/[ ]+/);
+  if (message.content.includes("@everyone")) {
+    if (message.member.hasPermission("MENTION_EVERYONE")) return;
+    if (!message.channel.guild) return;
+    if (!spread[message.guild.id])
+      spread[message.guild.id] = {
+        onoff: "Off"
+      };
+    if (spread[message.guild.id].onoff === "Off") return;
+    message.delete();
+    return message.reply(
+      `**You Dont Have \`MENTION_EVERYONE\` Permission .**`
+    );
+  }
+});
 //===============antispam==========//
 client.on('message', message => {
 if (message.guild) return;
