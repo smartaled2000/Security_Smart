@@ -98,16 +98,6 @@ client.on("message", message => {
   }
 });
 //===============antieveryone==========//
-client.on("message", msg => {
-  if (msg.author.bot) return;
-  if (msg.content.includes("@everyone")) {
-    if (msg.member.hasPermission("MENTION_EVERYONE")) return;
-    if (!msg.channel.guild) return;
-    msg.delete();
-    m.ban();
-    msg.reply(" text ");
-  }
-});
 //===============antispam==========//
 client.on('message', message => {
 if (message.guild) return;
