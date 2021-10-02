@@ -62,10 +62,10 @@ var embed = new Discord.MessageEmbed()
 ⚙️Moderation Commands 
 %%invite -- %%userinfo -- %%ping -- %%serverinfo
 %%bot -- %%lock -- %%unlock -- %%clear
-%%ban -- %%mute -- %%unmute -- %%unban
+%%ban has changed -- %%mute -- %%unmute -- %%unban has changed
 
 🛡️Security Commands
-%%anti kick -- %%ban has changed
+%%anti kick -- %%anti ban
 %%anti roleC -- %%anti roleD 
 %%anti channelD -- %%anti channelC
 %%anti bot [on/off]
