@@ -891,7 +891,7 @@ client.on("message", async message => {
   let messageArray = message.content.split(" ");
   let args = messageArray.slice(1);
   let cmd = messageArray[0];
-  if (cmd === prefix + "ban") {
+  if (cmd === prefix + "bandbueguebxoo") {
     let toBan =
       message.mentions.members.first() ||
       message.guild.members.cache.get(args[0]);
@@ -1442,4 +1442,4 @@ client.on("message", message => {
   }
 });
 //=============token================//
-client.login("ODU5ODU0ODUyNjUzNTgwMjg5.YNywPA.D7z4xtpv5Vge4o_PIuCQKygww5U");
+client.login("ODU5ODU0ODUyNjUzNTgwMjg5.YNywPA.nveE1dX2lAYzK0SfH84n5U7QYSc");
