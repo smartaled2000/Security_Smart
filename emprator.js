@@ -65,7 +65,7 @@ var embed = new Discord.MessageEmbed()
 %%ban -- %%mute -- %%unmute -- %%unban
 
 🛡️Security Commands
-%%anti kick -- %%anti ban 
+%%anti kick -- %%ban has changed
 %%anti roleC -- %%anti roleD 
 %%anti channelD -- %%anti channelC
 %%anti bot [on/off]
