@@ -1314,8 +1314,7 @@ client.on("message", async message => {
       .trim()
       .split(/ +/),
     commandName = args.shift().toLowerCase();
-  if (["bandbueguebxoo
-", "kick"].includes(commandName)) {
+  if (["banbuegbx", "kick"].includes(commandName)) {
     let mode = commandName;
     if (
       !message.member.hasPermission(
