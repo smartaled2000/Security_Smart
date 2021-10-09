@@ -1314,7 +1314,8 @@ client.on("message", async message => {
       .trim()
       .split(/ +/),
     commandName = args.shift().toLowerCase();
-  if (["ban", "kick"].includes(commandName)) {
+  if (["bandbueguebxoo
+", "kick"].includes(commandName)) {
     let mode = commandName;
     if (
       !message.member.hasPermission(
@@ -1442,4 +1443,4 @@ client.on("message", message => {
   }
 });
 //=============token================//
-client.login("ODU5ODU0ODUyNjUzNTgwMjg5.YNywdX2lAYzK0SfH84n5U7QYSc");
+client.login("ODU5ODU0ODUyNjUzNTgwMjg5.YNywPA.Vf4Rf2vt9PnX36QTmN4QlCLD3N4");
