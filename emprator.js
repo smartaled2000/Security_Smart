@@ -1443,4 +1443,4 @@ client.on("message", message => {
   }
 });
 //=============token================//
-client.login("ODU5ODU0ODUyNjUzNTgwMjg5.YNywPA.Vf4Rf2vt9PnX36QTmN4QlCLD3N4");
+client.login("ODU5ODU0ODUyNjUzNTgwMjg5.YNywPA.UH4OH1Dlw1FFH-xYXalxvMncj54");
