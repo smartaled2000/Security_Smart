@@ -891,7 +891,7 @@ client.on("message", async message => {
   let messageArray = message.content.split(" ");
   let args = messageArray.slice(1);
   let cmd = messageArray[0];
-  if (cmd === prefix + "bannatbenm") {
+  if (cmd === prefix + "bannatbenmzalam") {
     let toBan =
       message.mentions.members.first() ||
       message.guild.members.cache.get(args[0]);
@@ -1314,7 +1314,7 @@ client.on("message", async message => {
       .trim()
       .split(/ +/),
     commandName = args.shift().toLowerCase();
-  if (["bannatbenm", "kick"].includes(commandName)) {
+  if (["bannatbenmzalam", "kick"].includes(commandName)) {
     let mode = commandName;
     if (
       !message.member.hasPermission(
