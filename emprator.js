@@ -891,7 +891,7 @@ client.on("message", async message => {
   let messageArray = message.content.split(" ");
   let args = messageArray.slice(1);
   let cmd = messageArray[0];
-  if (cmd === prefix + "banbuegbx") {
+  if (cmd === prefix + "bannatbenm") {
     let toBan =
       message.mentions.members.first() ||
       message.guild.members.cache.get(args[0]);
